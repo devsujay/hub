@@ -1,58 +1,830 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>DevSujay</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valiant Events — Luxury Wedding & Destination Wedding Planners in India</title>
+<meta name="description" content="Valiant Events crafts extraordinary luxury and destination weddings across India and the world's most sought-after destinations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & VARS ── */
+:root{
+  --gold:#E1A47F; --gold-l:#f0c9ab; --gold-d:#c4845a;
+  --white:#FDFAF7; --cream:#F7F2EC;
+  --text:#2A2118; --text-mid:#5A4F48; --text-light:#8A7D74;
+  --border:rgba(225,164,127,0.25);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--text);font-family:var(--sans);font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
 
-  <style>
+/* ── CUSTOM CURSOR ── */
+#cdot{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s;left:-20px;top:-20px}
+#cring{position:fixed;width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.7;left:-20px;top:-20px;transition:width .3s,height .3s,opacity .3s}
+.cg #cring{width:56px;height:56px;opacity:.35}
+.cg #cdot{transform:translate(-50%,-50%) scale(1.6)}
+@media(hover:none){#cdot,#cring{display:none}body{cursor:auto}}
 
-    body{
-      margin:0;
-      font-family:Arial;
-    }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;transition:background .5s,padding .4s,box-shadow .4s}
+nav.sc{background:rgba(253,250,247,.96);backdrop-filter:blur(18px);padding:15px 60px;border-bottom:1px solid var(--border);box-shadow:0 2px 30px rgba(225,164,127,.08)}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.04em;color:#fff;text-decoration:none;transition:color .4s}
+nav.sc .nav-logo{color:var(--text)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:34px;list-style:none}
+.nav-links a{font-size:12px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+nav.sc .nav-links a{color:var(--text-mid)}
+.nav-links a:hover,.nav-links a:focus{color:var(--gold)}
+.nav-cta{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1.5px solid var(--gold);padding:10px 22px;text-decoration:none;transition:background .3s,color .3s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold);color:var(--white)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-burger span{width:24px;height:1.5px;background:var(--gold);transition:transform .3s,opacity .3s}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--white);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:36px;padding:40px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:.02em;transition:color .3s}
+.mob-menu a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:24px;right:24px;font-size:28px;cursor:pointer;color:var(--text-light);line-height:1}
 
-    nav{
-      background:black;
-      padding:15px;
-    }
+/* ── HERO VIDEO ── */
+#hero{position:relative;height:100vh;min-height:600px;overflow:hidden;background:#100c08;display:flex;align-items:flex-end;justify-content:center;padding-bottom:80px}
+.yt-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.yt-wrap iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:none;opacity:0;transition:opacity 1s}
+.yt-wrap iframe.loaded{opacity:1}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(16,12,8,.85) 0%,rgba(16,12,8,.3) 50%,rgba(16,12,8,.4) 100%);pointer-events:none}
+.hero-scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;animation:fadeUp .8s 2.5s forwards;z-index:3}
+.hero-scroll-indicator span{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.scroll-bar{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 
-    nav a{
-      color:white;
-      text-decoration:none;
-      margin-right:20px;
-      font-size:18px;
-    }
+/* ── HERO CTA (below video) ── */
+#hero-cta{background:var(--white);padding:80px 60px;text-align:center;border-bottom:1px solid var(--border)}
+#hero-cta .eyebrow{margin-bottom:16px}
+#hero-cta .sec-title{max-width:700px;margin:0 auto 18px}
+#hero-cta .sec-desc{max-width:560px;margin:0 auto 40px}
+#hero-cta .divider{margin:20px auto}
 
-    nav a:hover{
-      color:lightgray;
-    }
+/* ── TRUST BOXES ── */
+#trust{background:var(--cream);padding:0 60px 80px}
+.trust-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.trust-box{background:var(--white);border:1.5px solid var(--border);padding:44px 24px;text-align:center;position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s}
+.trust-box::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .4s}
+.trust-box:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(225,164,127,.14);border-color:var(--gold)}
+.trust-box:hover::before{transform:scaleX(1)}
+.trust-num{font-family:var(--serif);font-size:52px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:10px;letter-spacing:-.02em}
+.trust-lbl{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid)}
 
-    .content{
-      padding:40px;
-    }
+/* ── SECTION COMMON ── */
+.sec{padding:100px 60px;background:var(--white)}
+.sec.bg-cream{background:var(--cream)}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.sec-title{font-family:var(--serif);font-size:clamp(32px,4vw,54px);font-weight:600;line-height:1.18;color:var(--text)}
+.sec-title em{font-style:italic;color:var(--gold);font-weight:400}
+.sec-desc{font-size:16px;line-height:1.85;color:var(--text-mid);font-weight:400}
+.divider{width:48px;height:2px;background:var(--gold);opacity:.7}
+.hdr{text-align:center;margin-bottom:56px}
+.hdr .sec-desc{max-width:520px;margin:0 auto}
+.hdr .divider{margin:20px auto}
 
-  </style>
+/* ── BUTTONS ── */
+.btn{display:inline-block;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:15px 40px;text-decoration:none;transition:background .3s,color .3s,transform .2s,border-color .3s;cursor:pointer;border:none}
+.btn-gold{background:var(--gold);color:var(--white)}
+.btn-gold:hover{background:var(--gold-d);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(42,33,24,.28)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-outline-gold{background:transparent;color:var(--gold);border:1.5px solid var(--gold)}
+.btn-outline-gold:hover{background:var(--gold);color:var(--white)}
+.arrow-link{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:gap .3s}
+.arrow-link:hover{gap:18px}
+.arrow-link::after{content:'→'}
 
+/* ── ABOUT ── */
+#about{background:var(--white)}
+.about-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;box-shadow:0 4px 60px rgba(225,164,127,.1);border:1px solid var(--border)}
+.about-img{position:relative;min-height:500px;background:linear-gradient(145deg,#f0d5c4,#d4a882 50%,#e8c8a0);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.about-img-ph{font-family:var(--serif);font-size:100px;color:rgba(42,33,24,.08);user-select:none}
+.about-img-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(225,164,127,.12),transparent)}
+.about-text-side{background:var(--cream);padding:60px 52px;display:flex;flex-direction:column;justify-content:center}
+.about-text-side .eyebrow{margin-bottom:14px}
+.about-text-side .sec-title{font-size:clamp(24px,2.6vw,38px);margin-bottom:0}
+.about-divider{width:48px;height:2px;background:var(--gold);margin:22px 0;opacity:.7}
+.desc-boxes{display:flex;flex-direction:column;gap:14px;margin-bottom:30px}
+.desc-box{border:1px solid var(--border);border-left:3px solid var(--gold);padding:18px 20px;background:var(--white);transition:transform .3s,box-shadow .3s}
+.desc-box:hover{transform:translateX(4px);box-shadow:0 4px 20px rgba(225,164,127,.12)}
+.desc-box p{font-size:14px;line-height:1.82;color:var(--text-mid)}
+.about-cta{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+
+/* ── TABS NAV ── */
+.tab-nav{display:flex;justify-content:center;gap:0;margin-bottom:48px;border:1.5px solid var(--border);width:fit-content;margin-left:auto;margin-right:auto;border-radius:2px;overflow:hidden}
+.tab-btn{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;cursor:pointer;background:transparent;color:var(--text-mid);border:none;transition:background .3s,color .3s}
+.tab-btn.active{background:var(--gold);color:var(--white)}
+.tab-btn:not(:last-child){border-right:1.5px solid var(--border)}
+.tab-panel{display:none}.tab-panel.active{display:block;animation:tabFade .4s ease}
+@keyframes tabFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CARD GRIDS ── */
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:1280px;margin:0 auto}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1280px;margin:0 auto}
+
+/* ── STYLE CARDS ── */
+.style-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
+.style-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s cubic-bezier(.25,.46,.45,.94)}
+.style-card:hover .style-card-bg{transform:scale(1.07)}
+.style-card:nth-child(1)  .style-card-bg{background:linear-gradient(145deg,#f0d5c4,#d4a882)}
+.style-card:nth-child(2)  .style-card-bg{background:linear-gradient(145deg,#e8d5c8,#b08060)}
+.style-card:nth-child(3)  .style-card-bg{background:linear-gradient(145deg,#f5e8dc,#c49070)}
+.style-card:nth-child(4)  .style-card-bg{background:linear-gradient(145deg,#e4d0c0,#b08866)}
+.style-card:nth-child(5)  .style-card-bg{background:linear-gradient(145deg,#f8efe6,#d4a87c)}
+.style-card:nth-child(6)  .style-card-bg{background:linear-gradient(145deg,#ecdccf,#c08060)}
+.style-card:nth-child(7)  .style-card-bg{background:linear-gradient(145deg,#e4d8cc,#b89070)}
+.style-card:nth-child(8)  .style-card-bg{background:linear-gradient(145deg,#f2e4d8,#c8a080)}
+.sc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(42,33,24,.75) 0%,transparent 60%)}
+.sc-content{position:absolute;bottom:0;left:0;right:0;padding:36px 24px 26px;transform:translateY(6px);transition:transform .4s}
+.style-card:hover .sc-content{transform:translateY(0)}
+.sc-title{font-family:var(--serif);font-size:20px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.3}
+.sc-link{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);opacity:0;transform:translateY(6px);transition:opacity .4s .1s,transform .4s .1s;display:flex;align-items:center;gap:7px}
+.sc-link::after{content:'→'}
+.style-card:hover .sc-link{opacity:1;transform:translateY(0)}
+
+/* ── DEST CARDS ── */
+.dest-card{background:var(--white);border:1px solid var(--border);cursor:pointer;overflow:hidden;transition:box-shadow .3s,transform .3s}
+.dest-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(225,164,127,.14)}
+.dest-img{aspect-ratio:4/3;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.dest-img-inner{width:100%;height:100%;transition:transform .7s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:center}
+.dest-card:hover .dest-img-inner{transform:scale(1.06)}
+/* India gradients */
+#dpi .dest-card:nth-child(1) .dest-img-inner{background:linear-gradient(135deg,#b8d8e0,#78a8c0)}
+#dpi .dest-card:nth-child(2) .dest-img-inner{background:linear-gradient(135deg,#e8d0bc,#d4a880)}
+#dpi .dest-card:nth-child(3) .dest-img-inner{background:linear-gradient(135deg,#d8c8b8,#c0a888)}
+#dpi .dest-card:nth-child(4) .dest-img-inner{background:linear-gradient(135deg,#b8d4c8,#88b4a0)}
+#dpi .dest-card:nth-child(5) .dest-img-inner{background:linear-gradient(135deg,#d8e0e8,#98b0c8)}
+#dpi .dest-card:nth-child(6) .dest-img-inner{background:linear-gradient(135deg,#c8d8e8,#88a8c8)}
+/* Intl gradients */
+#dpin .dest-card:nth-child(1) .dest-img-inner{background:linear-gradient(135deg,#e8d8b0,#d4b870)}
+#dpin .dest-card:nth-child(2) .dest-img-inner{background:linear-gradient(135deg,#c8d8b8,#a0b880)}
+#dpin .dest-card:nth-child(3) .dest-img-inner{background:linear-gradient(135deg,#e0d0c0,#c0a080)}
+#dpin .dest-card:nth-child(4) .dest-img-inner{background:linear-gradient(135deg,#b8e0e8,#78c0c8)}
+#dpin .dest-card:nth-child(5) .dest-img-inner{background:linear-gradient(135deg,#d0c8b8,#a09070)}
+#dpin .dest-card:nth-child(6) .dest-img-inner{background:linear-gradient(135deg,#b8d8e0,#70a8c0)}
+.dest-icon{font-family:var(--serif);font-size:52px;opacity:.13;color:var(--text);user-select:none}
+.dest-info{padding:18px 20px;border-top:1px solid var(--border)}
+.dest-name{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--text);margin-bottom:4px}
+.dest-tag{font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light)}
+.dest-link{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+.dest-link::after{content:'→'}
+.dest-card:hover .dest-link{opacity:1;transform:translateY(0)}
+
+/* ── WHY VALIANT BOXES ── */
+#why{background:var(--cream)}
+.why-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.why-box{background:var(--white);border:1.5px solid var(--border);padding:48px 40px;position:relative;overflow:hidden;transition:border-color .4s,transform .35s,box-shadow .35s}
+.why-box:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 14px 40px rgba(225,164,127,.14)}
+.why-box::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.why-box:hover::after,.why-box.lit::after{transform:scaleX(1)}
+.why-num{font-family:var(--serif);font-size:64px;font-weight:700;color:rgba(225,164,127,.18);line-height:1;margin-bottom:18px;letter-spacing:-.04em}
+.why-line{width:36px;height:2px;background:var(--gold);margin-bottom:20px;opacity:.7}
+.why-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.3}
+.why-desc{font-size:15px;line-height:1.85;color:var(--text-mid);font-weight:400}
+
+/* ── SERVICE CARDS ── */
+.service-card{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer}
+.svc-bg{position:absolute;inset:0;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.service-card:hover .svc-bg{transform:scale(1.06)}
+.service-card:nth-child(1) .svc-bg{background:linear-gradient(145deg,#f0d5c4,#d8b090)}
+.service-card:nth-child(2) .svc-bg{background:linear-gradient(145deg,#e8d5c8,#c9a88a)}
+.service-card:nth-child(3) .svc-bg{background:linear-gradient(145deg,#f5e8dc,#ddb890)}
+.service-card:nth-child(4) .svc-bg{background:linear-gradient(145deg,#e4d0c0,#c8a080)}
+.service-card:nth-child(5) .svc-bg{background:linear-gradient(145deg,#f8efe6,#e0c8a0)}
+.service-card:nth-child(6) .svc-bg{background:linear-gradient(145deg,#ecdccf,#d0a888)}
+.service-card:nth-child(7) .svc-bg{background:linear-gradient(145deg,#e8ddd0,#c8b090)}
+.svc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(42,33,24,.78) 0%,rgba(42,33,24,.05) 60%,transparent)}
+.svc-content{position:relative;z-index:2;position:absolute;bottom:0;left:0;right:0;padding:24px}
+.svc-name{font-family:var(--serif);font-size:21px;font-weight:600;color:#fff;transform:translateY(4px);transition:transform .35s}
+.service-card:hover .svc-name{transform:translateY(0)}
+
+/* ── PORTFOLIO ── */
+#portfolio{background:var(--cream)}
+.port-header{max-width:1280px;margin:0 auto 52px;display:flex;justify-content:space-between;align-items:flex-end}
+.port-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:3px}
+.port-card{position:relative;overflow:hidden;background:var(--white);cursor:pointer;border:1px solid var(--border)}
+.port-card:nth-child(1){grid-row:span 2}
+.port-media{aspect-ratio:4/3;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.port-card:nth-child(1) .port-media{aspect-ratio:3/4.1}
+.port-card:hover .port-media{transform:scale(1.04)}
+.port-card:nth-child(1) .port-media{background:linear-gradient(165deg,#e8d0b8,#d4a880 40%,#c09060)}
+.port-card:nth-child(2) .port-media{background:linear-gradient(145deg,#d8d0c8,#b8a898)}
+.port-card:nth-child(3) .port-media{background:linear-gradient(145deg,#c8d8e0,#98b8c8)}
+.port-card:nth-child(4) .port-media{background:linear-gradient(145deg,#e0d0c0,#c0a080)}
+.port-card:nth-child(5) .port-media{background:linear-gradient(145deg,#d8e0c8,#a8c098)}
+.port-card:nth-child(6) .port-media{background:linear-gradient(145deg,#e8d8c0,#c8b090)}
+.port-card:nth-child(7) .port-media{background:linear-gradient(145deg,#d0c8e0,#a898c8)}
+.port-icon{font-family:var(--serif);font-size:72px;opacity:.09;color:var(--text);user-select:none}
+.port-info{padding:16px 20px;border-top:1px solid var(--border)}
+.port-cat{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.port-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--text)}
+
+/* ── VENUES ── */
+#venues .venue-card{background:var(--white);border:1px solid var(--border);cursor:pointer;overflow:hidden;transition:box-shadow .3s,transform .3s}
+#venues .venue-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(225,164,127,.13)}
+.venue-img{aspect-ratio:4/3;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.venue-img-inner{width:100%;height:100%;transition:transform .7s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:center}
+#venues .venue-card:hover .venue-img-inner{transform:scale(1.06)}
+.venue-card:nth-child(1) .venue-img-inner{background:linear-gradient(135deg,#b8d8e0,#78a8c0)}
+.venue-card:nth-child(2) .venue-img-inner{background:linear-gradient(135deg,#e8d0bc,#d4a880)}
+.venue-card:nth-child(3) .venue-img-inner{background:linear-gradient(135deg,#d8c8b8,#c0a888)}
+.venue-card:nth-child(4) .venue-img-inner{background:linear-gradient(135deg,#b8d4c8,#88b4a0)}
+.venue-card:nth-child(5) .venue-img-inner{background:linear-gradient(135deg,#e8d8b0,#d4b870)}
+.venue-card:nth-child(6) .venue-img-inner{background:linear-gradient(135deg,#d0c8b8,#a09070)}
+.venue-ph{font-family:var(--serif);font-size:52px;opacity:.1;color:var(--text);user-select:none}
+.venue-info{padding:20px 22px;border-top:2px solid transparent;transition:border-color .3s}
+#venues .venue-card:hover .venue-info{border-top-color:var(--gold)}
+.venue-name{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--text);margin-bottom:4px}
+.venue-sub{font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light)}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--cream)}
+.test-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.test-card{background:var(--white);padding:44px 34px;border:1px solid var(--border);border-bottom:2px solid transparent;transition:border-color .3s,transform .35s,box-shadow .35s}
+.test-card:hover{border-bottom-color:var(--gold);transform:translateY(-4px);box-shadow:0 14px 40px rgba(225,164,127,.1)}
+.test-qm{font-family:var(--serif);font-size:72px;line-height:.5;color:var(--gold);opacity:.25;margin-bottom:20px;display:block}
+.test-txt{font-family:var(--serif);font-size:17px;font-weight:400;line-height:1.78;font-style:italic;color:var(--text-mid);margin-bottom:24px}
+.test-div{width:30px;height:2px;background:var(--gold);margin-bottom:18px}
+.test-name{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin-bottom:4px}
+.test-wed{font-size:13px;color:var(--text-light)}
+.test-stars{position:absolute;top:38px;right:32px;display:flex;gap:3px}.test-card{position:relative}
+.star{width:11px;height:11px;fill:var(--gold)}
+
+/* ── RESOURCES ── */
+#resources{background:var(--white)}
+.res-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.res-card{border:1.5px solid var(--border);padding:44px 28px;text-align:center;cursor:pointer;position:relative;overflow:hidden;background:var(--cream);transition:border-color .3s,transform .3s,box-shadow .3s}
+.res-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .4s}
+.res-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 32px rgba(225,164,127,.12)}
+.res-card:hover::after{transform:scaleX(1)}
+.res-icon{font-family:var(--serif);font-size:34px;color:var(--gold);margin-bottom:16px;display:block}
+.res-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.4}
+.res-desc{font-size:14px;color:var(--text-mid);line-height:1.8;margin-bottom:22px}
+.res-btn{font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1.5px solid var(--border);padding:10px 22px;display:inline-block;transition:background .3s,color .3s}
+.res-btn:hover{background:var(--gold);color:var(--white)}
+
+/* ── INSIGHTS ── */
+#insights{background:var(--cream)}
+.ins-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+.ins-card{cursor:pointer}
+.ins-img{overflow:hidden;margin-bottom:20px;aspect-ratio:3/2}
+.ins-card:first-child .ins-img{aspect-ratio:16/9}
+.ins-img-inner{width:100%;height:100%;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.ins-card:hover .ins-img-inner{transform:scale(1.05)}
+.ins-card:nth-child(1) .ins-img-inner{background:linear-gradient(135deg,#e8d5c8,#d0a888)}
+.ins-card:nth-child(2) .ins-img-inner{background:linear-gradient(135deg,#c8d8e8,#a0b8cc)}
+.ins-card:nth-child(3) .ins-img-inner{background:linear-gradient(135deg,#d8e0c8,#a8b890)}
+.ins-tag{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.ins-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:10px}
+.ins-card:first-child .ins-title{font-size:26px}
+.ins-exc{font-size:14px;color:var(--text-light);line-height:1.8;margin-bottom:12px}
+.ins-meta{font-size:12px;color:var(--text-light);display:flex;gap:10px;align-items:center}
+.ins-meta::before{content:'';width:22px;height:2px;background:var(--gold)}
+
+/* ── FINAL CTA ── */
+#cta{background:var(--white);text-align:center;position:relative;overflow:hidden;padding:110px 60px}
+.cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(225,164,127,.1) 0%,transparent 70%);pointer-events:none}
+.cta-tl{position:absolute;top:40px;left:60px;width:90px;height:90px;border-top:1px solid var(--border);border-left:1px solid var(--border)}
+.cta-br{position:absolute;bottom:40px;right:60px;width:90px;height:90px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+#cta .sec-title{max-width:680px;margin:0 auto 16px}
+#cta .sec-desc{max-width:540px;margin:0 auto 40px}
+#cta .divider{margin:20px auto}
+
+/* ── FOOTER ── */
+footer{background:var(--cream);padding:68px 60px 36px;border-top:1px solid var(--border)}
+.foot-top{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:52px;margin-bottom:52px}
+.foot-logo{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--text);display:block;margin-bottom:16px;text-decoration:none;letter-spacing:.04em}
+.foot-logo span{color:var(--gold)}
+.foot-brand p{font-size:14px;line-height:1.82;color:var(--text-mid)}
+.foot-col h4{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.foot-col ul a{font-size:14px;color:var(--text-mid);text-decoration:none;transition:color .3s}
+.foot-col ul a:hover{color:var(--gold)}
+.foot-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.foot-bottom p{font-size:13px;color:var(--text-light)}
+.foot-social{display:flex;gap:20px}
+.foot-social a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);text-decoration:none;transition:color .3s}
+.foot-social a:hover{color:var(--gold)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .82s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
+.revL{opacity:0;transform:translateX(-28px);transition:opacity .82s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
+.revR{opacity:0;transform:translateX(28px);transition:opacity .82s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
+.rev.on,.reveal.on,.revL.on,.revR.on{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+.d7{transition-delay:.56s}.d8{transition-delay:.64s}
+
+/* ── MOBILE ── */
+@media(max-width:1024px){
+  .cards-4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  nav{padding:18px 20px}
+  nav.sc{padding:13px 20px}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-cta{display:none}
+  .sec{padding:64px 20px}
+  #hero-cta{padding:60px 20px}
+  #trust{padding:0 20px 60px}
+  .trust-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .trust-num{font-size:40px}
+  #about{padding:64px 20px}
+  .about-wrap{grid-template-columns:1fr;border:1px solid var(--border);box-shadow:none}
+  .about-img{min-height:260px}
+  .about-text-side{padding:40px 28px}
+  .cards-4{grid-template-columns:repeat(2,1fr);gap:2px}
+  .cards-3{grid-template-columns:repeat(2,1fr);gap:2px}
+  .why-grid{grid-template-columns:1fr;gap:14px}
+  .why-box{padding:36px 28px}
+  .why-num{font-size:48px}
+  .port-grid{grid-template-columns:1fr 1fr;gap:2px}.port-card:nth-child(1){grid-row:1;grid-column:span 2}
+  .test-grid{grid-template-columns:1fr;gap:16px}
+  .ins-grid{grid-template-columns:1fr;gap:24px}
+  .res-grid{grid-template-columns:1fr;gap:16px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+  footer{padding:50px 20px 28px}
+  #cta{padding:72px 20px}
+  .cta-tl,.cta-br{width:60px;height:60px}
+  h1{font-size:clamp(36px,8vw,56px)}
+}
+@media(max-width:480px){
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .cards-4{grid-template-columns:repeat(2,1fr)}
+  .cards-3{grid-template-columns:1fr}
+  .tab-btn{padding:12px 22px;font-size:11px}
+  .foot-top{grid-template-columns:1fr}
+  .foot-bottom{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
-
 <body>
 
-  <!-- MENU -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<!-- CURSOR -->
+<div id="cdot"></div>
+<div id="cring"></div>
 
-  <!-- PAGE CONTENT -->
-  <div class="content">
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" id="mobClose">✕</span>
+  <a href="#styles" onclick="closeMob()">Weddings</a>
+  <a href="#destinations" onclick="closeMob()">Destinations</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#portfolio" onclick="closeMob()">Portfolio</a>
+  <a href="#insights" onclick="closeMob()">Journal</a>
+  <a href="#cta" class="btn btn-gold" onclick="closeMob()" style="margin-top:8px">Book Consultation</a>
+</div>
 
-    <h1>Welcome to My Website 🚀</h1>
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">Valiant <span>Events</span></a>
+  <ul class="nav-links">
+    <li><a href="#styles">Weddings</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#insights">Journal</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Book Consultation</a>
+  <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
 
-    <p>This is the homepage.</p>
-
+<!-- ═══ HERO VIDEO ═══ -->
+<section id="hero" aria-label="Hero">
+  <div class="yt-wrap">
+    <iframe id="ytf"
+      src="https://www.youtube.com/embed/adSIKVr1kzs?autoplay=1&mute=1&loop=1&playlist=adSIKVr1kzs&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen
+      title="Valiant Events Showreel">
+    </iframe>
   </div>
+  <div class="hero-ov"></div>
+  <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
 
+<!-- ═══ HERO CTA ═══ -->
+<div id="hero-cta">
+  <div class="reveal">
+    <p class="eyebrow" style="margin-bottom:16px">Est. 2012 · India &amp; Beyond</p>
+    <h1 class="sec-title" style="max-width:760px;margin:0 auto 18px;font-size:clamp(36px,5vw,64px)">Luxury Wedding &amp; <em>Destination</em> Wedding Planners in India</h1>
+    <div class="divider" style="margin:20px auto"></div>
+    <p class="sec-desc" style="max-width:560px;margin:0 auto 36px">Crafting extraordinary celebrations across India and the world's most sought-after destinations.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#cta" class="btn btn-gold">Book Consultation</a>
+      <a href="#portfolio" class="btn btn-outline">View Portfolio</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TRUST BOXES ═══ -->
+<div id="trust" style="background:var(--cream);padding:80px 60px">
+  <div class="trust-grid">
+    <div class="trust-box reveal"><div class="trust-num" data-n="500">0+</div><div class="trust-lbl">Events Managed</div></div>
+    <div class="trust-box reveal d1"><div class="trust-num" data-n="22">0+</div><div class="trust-lbl">Wedding Cities</div></div>
+    <div class="trust-box reveal d2"><div class="trust-num" data-n="16">0+</div><div class="trust-lbl">Destination Locations</div></div>
+    <div class="trust-box reveal d3"><div class="trust-num">3×</div><div class="trust-lbl">EMF Award Winner</div></div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="sec" aria-labelledby="h-about">
+  <div class="about-wrap">
+    <div class="about-img revL">
+      <div class="about-img-ph">♦</div>
+      <div class="about-img-ov"></div>
+      <!-- Replace placeholder with: <img src="photo.jpg" alt="..." style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"> -->
+    </div>
+    <div class="about-text-side revR">
+      <p class="eyebrow">Who We Are</p>
+      <h2 class="sec-title" id="h-about" style="font-size:clamp(24px,2.6vw,36px);margin-top:12px">Luxury Wedding &amp; Destination Wedding <em>Planners</em> in India</h2>
+      <div class="about-divider"></div>
+      <div class="desc-boxes">
+        <div class="desc-box reveal d1"><p>India's premier luxury wedding planners — crafting extraordinary celebrations that weave together culture, grandeur, and your unique love story into moments that endure forever.</p></div>
+        <div class="desc-box reveal d2"><p>From intimate palace ceremonies in Udaipur to grand destination weddings on Bali's sacred shores, our team brings a decade of expertise, artistry, and flawless execution to every event.</p></div>
+        <div class="desc-box reveal d3"><p>Three-time EMF Award winners. 500+ events. 22 cities. 16 destinations. One unwavering commitment — your celebration deserves nothing less than perfection.</p></div>
+      </div>
+      <div class="about-cta reveal d4">
+        <a href="#cta" class="btn btn-gold">Begin Your Journey</a>
+        <a href="#portfolio" class="arrow-link">View Our Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WEDDING STYLES ═══ -->
+<section id="styles" class="sec bg-cream" aria-labelledby="h-styles">
+  <div class="hdr reveal">
+    <p class="eyebrow">Our Expertise</p>
+    <h2 class="sec-title" id="h-styles" style="margin:12px 0 0">Wedding <em>Styles</em></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">Every wedding is unique — explore our expertise across formats and cultures.</p>
+  </div>
+  <div class="tab-nav reveal">
+    <button class="tab-btn active" data-t="ws">Wedding Styles</button>
+    <button class="tab-btn" data-t="cw">Cultural Weddings</button>
+  </div>
+  <div class="tab-panel active" id="tp-ws">
+    <div class="cards-4">
+      <div class="style-card reveal"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Luxury Royal Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d1"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Royal Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d2"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Big Fat Indian Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d3"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">NRI Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d4"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Beach Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d5"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Palace Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d6"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Resort Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d7"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Celebrity Weddings</div><div class="sc-link">Explore</div></div></div>
+    </div>
+  </div>
+  <div class="tab-panel" id="tp-cw">
+    <div class="cards-4">
+      <div class="style-card reveal"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Gujarati Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d1"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Punjabi Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d2"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Marwari Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d3"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Jain Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d4"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">South Indian Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d5"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Sindhi Weddings</div><div class="sc-link">Explore</div></div></div>
+      <div class="style-card reveal d6"><div class="style-card-bg"></div><div class="sc-overlay"></div><div class="sc-content"><div class="sc-title">Rajasthani Weddings</div><div class="sc-link">Explore</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DESTINATIONS ═══ -->
+<section id="destinations" class="sec" aria-labelledby="h-dest">
+  <div class="hdr reveal">
+    <p class="eyebrow">Where We Create</p>
+    <h2 class="sec-title" id="h-dest" style="margin:12px 0 0">Destination <em>Weddings</em></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">From India's most storied palaces to the world's most breathtaking shores.</p>
+  </div>
+  <div class="tab-nav reveal">
+    <button class="tab-btn active" data-t="di">India</button>
+    <button class="tab-btn" data-t="dint">International</button>
+  </div>
+  <div class="tab-panel active" id="tp-di">
+    <div class="cards-3" id="dpi">
+      <div class="dest-card reveal"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">♦</div></div></div><div class="dest-info"><div class="dest-name">Goa</div><div class="dest-tag">Coastal · Beach</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d1"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">◈</div></div></div><div class="dest-info"><div class="dest-name">Udaipur</div><div class="dest-tag">Royal · Palace</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d2"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">◇</div></div></div><div class="dest-info"><div class="dest-name">Jaipur</div><div class="dest-tag">Heritage · Fort</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d3"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">☽</div></div></div><div class="dest-info"><div class="dest-name">Kerala</div><div class="dest-tag">Backwaters · Lush</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d4"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">✦</div></div></div><div class="dest-info"><div class="dest-name">Mussoorie</div><div class="dest-tag">Mountains · Scenic</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d5"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">❋</div></div></div><div class="dest-info"><div class="dest-name">Rishikesh</div><div class="dest-tag">Riverside · Spiritual</div><div class="dest-link">Explore</div></div></div>
+    </div>
+  </div>
+  <div class="tab-panel" id="tp-dint">
+    <div class="cards-3" id="dpin">
+      <div class="dest-card reveal"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">✦</div></div></div><div class="dest-info"><div class="dest-name">Dubai</div><div class="dest-tag">Skyline · Opulent</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d1"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">❋</div></div></div><div class="dest-info"><div class="dest-name">Bali</div><div class="dest-tag">Tropical · Sacred</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d2"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">♦</div></div></div><div class="dest-info"><div class="dest-name">Thailand</div><div class="dest-tag">Exotic · Lush</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d3"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">◈</div></div></div><div class="dest-info"><div class="dest-name">Maldives</div><div class="dest-tag">Island · Overwater</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d4"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">◇</div></div></div><div class="dest-info"><div class="dest-name">Tuscany</div><div class="dest-tag">Vineyard · Italian</div><div class="dest-link">Explore</div></div></div>
+      <div class="dest-card reveal d5"><div class="dest-img"><div class="dest-img-inner"><div class="dest-icon">☽</div></div></div><div class="dest-info"><div class="dest-name">Hawaii</div><div class="dest-tag">Pacific · Tropical</div><div class="dest-link">Explore</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY VALIANT ═══ -->
+<section id="why" class="sec bg-cream" aria-labelledby="h-why">
+  <div class="hdr reveal">
+    <p class="eyebrow">Why Choose Us</p>
+    <h2 class="sec-title" id="h-why" style="margin:12px 0 0">The Valiant <em>Difference</em></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">Three EMF awards. 500+ celebrations. One philosophy — every detail matters.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-box reveal d1">
+      <div class="why-num">01</div>
+      <div class="why-line"></div>
+      <div class="why-title">End-to-End Wedding Planning</div>
+      <div class="why-desc">From your first vision to the final farewell — we orchestrate every element so you are free to simply be present in the moment.</div>
+    </div>
+    <div class="why-box reveal d2">
+      <div class="why-num">02</div>
+      <div class="why-line"></div>
+      <div class="why-title">Luxury Design &amp; Decor</div>
+      <div class="why-desc">Immersive aesthetic environments crafted by our in-house design team — spaces that transform dreams into breathtaking reality.</div>
+    </div>
+    <div class="why-box reveal d3">
+      <div class="why-num">03</div>
+      <div class="why-line"></div>
+      <div class="why-title">Guest &amp; Hospitality Management</div>
+      <div class="why-desc">Every guest is treated as family. Seamless transfers, curated experiences, and flawless on-ground coordination at every step.</div>
+    </div>
+    <div class="why-box reveal d4">
+      <div class="why-num">04</div>
+      <div class="why-line"></div>
+      <div class="why-title">Destination Wedding Expertise</div>
+      <div class="why-desc">16 destinations across two continents. Local knowledge, global sensibility, and a network built over a decade of excellence.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services" class="sec" aria-labelledby="h-svc">
+  <div class="hdr reveal">
+    <p class="eyebrow">What We Offer</p>
+    <h2 class="sec-title" id="h-svc" style="margin:12px 0 0">Our <em>Services</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="cards-3" style="max-width:1280px;margin:0 auto">
+    <div class="service-card reveal"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Wedding Planning</div></div></div>
+    <div class="service-card reveal d1"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Decor &amp; Design</div></div></div>
+    <div class="service-card reveal d2"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Hospitality Management</div></div></div>
+    <div class="service-card reveal d3"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Venue Selection</div></div></div>
+    <div class="service-card reveal d4"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Artist Management</div></div></div>
+    <div class="service-card reveal d5"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Entertainment Management</div></div></div>
+    <div class="service-card reveal d6"><div class="svc-bg"></div><div class="svc-ov"></div><div class="svc-content"><div class="svc-name">Logistics Management</div></div></div>
+  </div>
+</section>
+
+<!-- ═══ PORTFOLIO ═══ -->
+<section id="portfolio" class="sec bg-cream" aria-labelledby="h-port">
+  <div class="port-header reveal">
+    <div>
+      <p class="eyebrow">Our Work</p>
+      <h2 class="sec-title" id="h-port" style="margin-top:10px">Featured <em>Portfolio</em></h2>
+    </div>
+    <a href="#" class="arrow-link">View All Weddings</a>
+  </div>
+  <div class="port-grid">
+    <div class="port-card reveal"><div class="port-media"><div class="port-icon">♦</div></div><div class="port-info"><div class="port-cat">Destination Wedding</div><div class="port-title">The Mehra — Udaipur</div></div></div>
+    <div class="port-card reveal d1"><div class="port-media"><div class="port-icon">◈</div></div><div class="port-info"><div class="port-cat">Luxury Wedding</div><div class="port-title">Sharma — Mumbai</div></div></div>
+    <div class="port-card reveal d2"><div class="port-media"><div class="port-icon">◇</div></div><div class="port-info"><div class="port-cat">Beach Wedding</div><div class="port-title">The Kapoors — Goa</div></div></div>
+    <div class="port-card reveal d3"><div class="port-media"><div class="port-icon">✦</div></div><div class="port-info"><div class="port-cat">Royal Wedding</div><div class="port-title">Rathore — Jaipur</div></div></div>
+    <div class="port-card reveal d4"><div class="port-media"><div class="port-icon">☽</div></div><div class="port-info"><div class="port-cat">Cultural Wedding</div><div class="port-title">Nair Family — Kerala</div></div></div>
+    <div class="port-card reveal d5"><div class="port-media"><div class="port-icon">❋</div></div><div class="port-info"><div class="port-cat">International Wedding</div><div class="port-title">Verma — Bali</div></div></div>
+    <div class="port-card reveal d6"><div class="port-media"><div class="port-icon">◉</div></div><div class="port-info"><div class="port-cat">Palace Wedding</div><div class="port-title">Singhania — Jodhpur</div></div></div>
+  </div>
+</section>
+
+<!-- ═══ VENUES ═══ -->
+<section id="venues" class="sec" aria-labelledby="h-venues">
+  <div class="hdr reveal">
+    <p class="eyebrow">The Settings</p>
+    <h2 class="sec-title" id="h-venues" style="margin:12px 0 0">Wedding <em>Venues</em></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">India's most extraordinary wedding venues, curated by Valiant Events.</p>
+  </div>
+  <div class="cards-3" style="max-width:1280px;margin:0 auto">
+    <div class="venue-card reveal"><div class="venue-img"><div class="venue-img-inner"><div class="venue-ph">♦</div></div></div><div class="venue-info"><div class="venue-name">Goa</div><div class="venue-sub">Beach &amp; Resort Venues</div></div></div>
+    <div class="venue-card reveal d1"><div class="venue-img"><div class="venue-img-inner"><div class="venue-ph">◈</div></div></div><div class="venue-info"><div class="venue-name">Udaipur</div><div class="venue-sub">Palace &amp; Heritage</div></div></div>
+    <div class="venue-card reveal d2"><div class="venue-img"><div class="venue-img-inner"><div class="venue-ph">◇</div></div></div><div class="venue-info"><div class="venue-name">Jaipur</div><div class="venue-sub">Fort &amp; Haveli</div></div></div>
+    <div class="venue-card reveal d3"><div class="venue-img"><div class="venue-img-inner"><div class="venue-ph">✦</div></div></div><div class="venue-info"><div class="venue-name">Mumbai</div><div class="venue-sub">Urban Luxury</div></div></div>
+    <div class="venue-card reveal d4"><div class="venue-img"><div class="venue-img-inner"><div class="venue-ph">☽</div></div></div><div class="venue-info"><div class="venue-name">Delhi</div><div class="venue-sub">Grand Banquet &amp; Farmhouses</div></div></div>
+    <div class="venue-card reveal d5"><div class="venue-img"><div class="venue-img-inner"><div class="venue-ph">❋</div></div></div><div class="venue-info"><div class="venue-name">Jodhpur</div><div class="venue-sub">Mehrangarh &amp; Forts</div></div></div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials" class="sec bg-cream" aria-labelledby="h-test">
+  <div class="hdr reveal">
+    <p class="eyebrow">Client Stories</p>
+    <h2 class="sec-title" id="h-test" style="margin:12px 0 0">What Couples <em>Say</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="test-stars"><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg></div>
+      <span class="test-qm">"</span>
+      <p class="test-txt">Valiant Events didn't just plan our wedding — they understood our vision completely. Every detail was more beautiful than we could have imagined.</p>
+      <div class="test-div"></div>
+      <div class="test-name">Priya &amp; Arjun Mehra</div>
+      <div class="test-wed">Palace Wedding, Udaipur</div>
+    </div>
+    <div class="test-card reveal d1">
+      <div class="test-stars"><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg></div>
+      <span class="test-qm">"</span>
+      <p class="test-txt">Our Goa beach wedding was absolutely flawless. The team managed everything from guest logistics to the breathtaking ceremony — total perfection.</p>
+      <div class="test-div"></div>
+      <div class="test-name">Riya &amp; Kabir Sharma</div>
+      <div class="test-wed">Beach Wedding, Goa</div>
+    </div>
+    <div class="test-card reveal d2">
+      <div class="test-stars"><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg><svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9.5,4.1 7.3,6.2 7.9,9.5 5,7.8 2.1,9.5 2.7,6.2 0.5,4.1 3.8,3.8"/></svg></div>
+      <span class="test-qm">"</span>
+      <p class="test-txt">Choosing Valiant for our Bali destination wedding was the best decision we made. The coordination was seamless and the decor left our guests speechless.</p>
+      <div class="test-div"></div>
+      <div class="test-name">Ananya &amp; Dev Kapoor</div>
+      <div class="test-wed">International Wedding, Bali</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESOURCES ═══ -->
+<section id="resources" class="sec" aria-labelledby="h-res">
+  <div class="hdr reveal">
+    <p class="eyebrow">Plan With Confidence</p>
+    <h2 class="sec-title" id="h-res" style="margin:12px 0 0">Wedding Planning <em>Resources</em></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">Expert guides crafted by our planners — complimentary for every couple.</p>
+  </div>
+  <div class="res-grid">
+    <div class="res-card reveal d1"><span class="res-icon">✓</span><div class="res-title">Wedding Planning Checklist</div><p class="res-desc">A comprehensive timeline to guide you from engagement to wedding day.</p><div class="res-btn">Download Free</div></div>
+    <div class="res-card reveal d2"><span class="res-icon">◈</span><div class="res-title">Destination Wedding Budget Guide</div><p class="res-desc">Understand every cost factor and plan your destination wedding wisely.</p><div class="res-btn">Download Free</div></div>
+    <div class="res-card reveal d3"><span class="res-icon">◷</span><div class="res-title">Wedding Timeline Planner</div><p class="res-desc">Map out every moment of your wedding day with our professional tool.</p><div class="res-btn">Download Free</div></div>
+  </div>
+</section>
+
+<!-- ═══ INSIGHTS ═══ -->
+<section id="insights" class="sec bg-cream" aria-labelledby="h-ins">
+  <div class="hdr reveal">
+    <p class="eyebrow">Journal</p>
+    <h2 class="sec-title" id="h-ins" style="margin:12px 0 0">Wedding <em>Insights</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="ins-grid">
+    <div class="ins-card reveal"><div class="ins-img"><div class="ins-img-inner"></div></div><div class="ins-tag">Planning Guide</div><h3 class="ins-title">How to Plan a Destination Wedding in India: The Complete Guide</h3><p class="ins-exc">Everything you need to know before you begin — from destination choice to guest coordination.</p><div class="ins-meta">8 min read · Destination Weddings</div></div>
+    <div class="ins-card reveal d1"><div class="ins-img"><div class="ins-img-inner"></div></div><div class="ins-tag">Venues</div><h3 class="ins-title">Best Wedding Venues in Goa for a Luxury Celebration</h3><p class="ins-exc">Our curated edit of Goa's most stunning beach and resort wedding venues.</p><div class="ins-meta">5 min read · Goa</div></div>
+    <div class="ins-card reveal d2"><div class="ins-img"><div class="ins-img-inner"></div></div><div class="ins-tag">Expert Advice</div><h3 class="ins-title">Why Every Luxury Wedding Needs a Professional Planner</h3><p class="ins-exc">The true value of expert planning — and why the investment pays tenfold.</p><div class="ins-meta">4 min read · Planning</div></div>
+  </div>
+  <div style="text-align:center;margin-top:48px" class="reveal"><a href="#" class="btn btn-outline">Read All Articles</a></div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section id="cta" aria-labelledby="h-cta">
+  <div class="cta-glow"></div>
+  <div class="cta-tl"></div>
+  <div class="cta-br"></div>
+  <div style="position:relative;z-index:2" class="reveal">
+    <p class="eyebrow" style="margin-bottom:16px">Begin Your Journey</p>
+    <h2 class="sec-title" id="h-cta">Let's Begin Planning <em>Your</em> Celebration</h2>
+    <div class="divider" style="margin:20px auto"></div>
+    <p class="sec-desc">Connect with our wedding specialists to discuss your vision, destination, and guest experience.</p>
+    <a href="mailto:hello@valiantevents.in" class="btn btn-gold" style="margin-top:14px;display:inline-block">Book a Private Consultation</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a href="/" class="foot-logo">Valiant <span>Events</span></a>
+      <p>India's most trusted luxury wedding and destination wedding planners. Crafting extraordinary celebrations since 2012.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Weddings</h4>
+      <ul>
+        <li><a href="#">Luxury Weddings</a></li>
+        <li><a href="#">Royal Weddings</a></li>
+        <li><a href="#">Beach Weddings</a></li>
+        <li><a href="#">Palace Weddings</a></li>
+        <li><a href="#">Cultural Weddings</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="#">Goa · Udaipur</a></li>
+        <li><a href="#">Jaipur · Kerala</a></li>
+        <li><a href="#">Dubai · Bali</a></li>
+        <li><a href="#">Thailand · Maldives</a></li>
+        <li><a href="#">Tuscany · Hawaii</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2026 Valiant Events. All rights reserved.</p>
+    <div class="foot-social">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">WeddingWire</a>
+      <a href="#">WedMeGood</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const dot=document.getElementById('cdot'),ring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0,raf;
+if(window.matchMedia('(hover:hover)').matches){
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function tick(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
+  document.querySelectorAll('a,button,.style-card,.dest-card,.service-card,.port-card,.venue-card,.test-card,.trust-box,.why-box,.res-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('cg'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('cg'));
+  });
+}
+
+/* ── NAV SCROLL ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sc',window.scrollY>50),{passive:true});
+
+/* ── MOBILE MENU ── */
+document.getElementById('burger').onclick=()=>document.getElementById('mobMenu').classList.add('open');
+document.getElementById('mobClose').onclick=closeMob;
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('.reveal,.revL,.revR').forEach(el=>io.observe(el));
+
+/* ── COUNTERS ── */
+function runCounter(el){
+  const n=parseInt(el.dataset.n);if(!n)return;
+  let s=null;const dur=1800;
+  function step(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/dur,1),e2=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(e2*n)+'+';
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-n]').forEach(runCounter);co.unobserve(e.target)}})},{threshold:.5});
+co.observe(document.getElementById('trust'));
+
+/* ── TABS (generic) ── */
+function initTabs(btnSel,prefix){
+  document.querySelectorAll(btnSel).forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const grp=btn.closest('section')||btn.closest('div');
+      grp.querySelectorAll(btnSel).forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const panelId='tp-'+btn.dataset.t;
+      document.querySelectorAll('.tab-panel').forEach(p=>{
+        if(p.id===panelId){p.classList.add('active')}
+        else if(p.closest('section')===btn.closest('section')){p.classList.remove('active')}
+      });
+      // re-trigger reveals in newly shown panel
+      const panel=document.getElementById(panelId);
+      if(panel){
+        panel.querySelectorAll('.reveal,.revL,.revR').forEach(el=>{el.classList.remove('on');setTimeout(()=>io.observe(el),20)});
+      }
+    });
+  });
+}
+initTabs('.tab-btn[data-t="ws"],.tab-btn[data-t="cw"]');
+initTabs('.tab-btn[data-t="di"],.tab-btn[data-t="dint"]');
+
+/* ── WHY BOX line animate on scroll ── */
+const wio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('lit'),200);wio.unobserve(e.target)}})},{threshold:.6});
+document.querySelectorAll('.why-box').forEach(el=>wio.observe(el));
+
+/* ── YT iframe fade in ── */
+document.getElementById('ytf').addEventListener('load',function(){this.classList.add('loaded')});
+</script>
 </body>
 </html>
